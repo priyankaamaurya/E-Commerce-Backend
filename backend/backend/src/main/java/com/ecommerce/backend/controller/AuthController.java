@@ -1,6 +1,6 @@
 package com.ecommerce.backend.controller;
 
-import com.ecommerce.backend.config.JwtUtil;
+import com.ecommerce.backend.security.JwtUtil;
 import com.ecommerce.backend.dto.LoginRequest;
 import com.ecommerce.backend.model.User;
 import com.ecommerce.backend.repository.UserRepository;

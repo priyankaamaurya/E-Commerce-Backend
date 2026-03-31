@@ -1,5 +1,6 @@
-package com.ecommerce.backend.config;
+package com.ecommerce.backend.security;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -32,5 +33,14 @@ public class JwtUtil {
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
+    }
+
+    public Claims extractAllClaims(String token) {
+        return Jwts
+                .parserBuilder()
+                .setSigningKey(getSignKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
 }
