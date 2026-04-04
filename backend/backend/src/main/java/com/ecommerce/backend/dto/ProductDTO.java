@@ -14,11 +14,11 @@ public class ProductDTO {
     private String name;
 
     @Positive(message = "Price must be positive")
-    private double price;
+    private Double price;
 
     @NotBlank(message = "Description is required")
     private String description;
 
     @Min(value = 0, message = "Stock cannot be negative")
-    private int stock;
+    private Integer stock;
 }

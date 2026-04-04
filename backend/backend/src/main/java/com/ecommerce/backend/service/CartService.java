@@ -19,7 +19,7 @@ public class CartService {
     private ProductRepository productRepo;
 
     // Add to cart
-    public CartItem addToCart(String username,Long productId, int quantity) {
+    public CartItem addToCart(String username,Long productId, Integer quantity) {
 
         Product product = productRepo.findById(productId)
                 .orElseThrow(()-> new RuntimeException("Product not found"));
