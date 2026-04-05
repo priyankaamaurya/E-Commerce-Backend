@@ -6,8 +6,11 @@ import com.ecommerce.backend.model.Product;
 import com.ecommerce.backend.repository.OrderRepository;
 import com.ecommerce.backend.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +28,7 @@ public class OrderService {
         Order order = new Order();
 
         order.setUsername(username);
-        order.setOrderDate(new Date());
+        order.setOrderDate(LocalDateTime.now());
 
         Double total = 0.0;
 
@@ -34,6 +37,9 @@ public class OrderService {
             // FETCH PRODUCT FROM DB
             Product product = repo.findById(item.getProduct().getId())
                     .orElseThrow(() -> new RuntimeException("Product not found"));
+
+            // IMPORTANT LINE (YOU MISSED THIS)
+            item.setProduct(product);
 
             // SET VALUES
             item.setProductName(product.getName());
@@ -52,8 +58,8 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
-    public List<Order> getUserOrders(String username) {
-        return orderRepository.findByUsername(username);
+    public Page<Order> getUserOrders(String username, Pageable pageable) {
+        return orderRepository.findByUsername(username, pageable);
     }
 
     public List<Order> getAllOrders(){

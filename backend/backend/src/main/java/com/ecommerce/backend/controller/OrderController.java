@@ -4,6 +4,10 @@ import com.ecommerce.backend.model.Order;
 import com.ecommerce.backend.model.OrderItem;
 import com.ecommerce.backend.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,14 +34,20 @@ public class OrderController {
 
     // ✅ GET MY ORDERS
     @GetMapping("/my")
-    public List<Order> getMyOrders() {
+    public Page<Order> getMyOrders(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
 
         String username = SecurityContextHolder
                 .getContext()
                 .getAuthentication()
                 .getName();
 
-        return orderService.getUserOrders(username);
+        Pageable pageable = PageRequest.of(
+                page,
+                size,
+                Sort.by("orderDate").descending()
+        );
+
+        return orderService.getUserOrders(username, pageable);
     }
 
     // ✅ ADMIN ONLY
