@@ -22,6 +22,8 @@ public class Order {
 
     private LocalDateTime orderDate;
 
+    private String status;
+
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<OrderItem> items;

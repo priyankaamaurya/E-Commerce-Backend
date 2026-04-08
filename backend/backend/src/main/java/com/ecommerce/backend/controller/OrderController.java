@@ -20,7 +20,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    // ✅ PLACE ORDER
+    // PLACE ORDER
     @PostMapping("/place")
     public Order placeOrder(@RequestBody List<OrderItem> items) {
 
@@ -32,7 +32,7 @@ public class OrderController {
         return orderService.placeOrder(username, items);
     }
 
-    // ✅ GET MY ORDERS
+    // GET MY ORDERS
     @GetMapping("/my")
     public Page<Order> getMyOrders(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
 
@@ -50,9 +50,20 @@ public class OrderController {
         return orderService.getUserOrders(username, pageable);
     }
 
-    // ✅ ADMIN ONLY
+    // ADMIN ONLY
     @GetMapping("/all")
     public List<Order> getAllOrders() {
         return orderService.getAllOrders();
     }
+
+    // ADMIN UPDATE ORDER STATUS
+    @PutMapping("/{orderId}/status")
+    public Order updateStatus(
+            @PathVariable Long orderId,
+            @RequestParam String status) {
+
+        return orderService.updateOrderStatus(orderId,status);
+    }
+
 }
+

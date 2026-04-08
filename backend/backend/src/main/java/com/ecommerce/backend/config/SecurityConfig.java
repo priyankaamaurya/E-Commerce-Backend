@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,6 +29,16 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(auth -> auth
 
+                        // Swagger
+                        .requestMatchers(
+                                "/v3/api-docs",
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html"
+//                                "/swagger-resources/**",
+//                                "/webjars/**"
+                        ).permitAll()
+
                         // public APIs
                         .requestMatchers("/api/auth/**").permitAll()
 
@@ -45,6 +57,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/orders/place").hasRole("USER")
                         .requestMatchers(HttpMethod.GET, "/api/orders/my").hasRole("USER")
                         .requestMatchers(HttpMethod.GET, "/api/orders/all").hasRole("ADMIN")
+
+                        .requestMatchers("/api/orders/*/status").hasRole("ADMIN")
 
                         .anyRequest().authenticated()
                 )

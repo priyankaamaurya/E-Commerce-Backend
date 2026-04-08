@@ -23,12 +23,17 @@ public class OrderService {
     @Autowired
     private ProductRepository repo;
 
+    @Autowired
+    private EmailService emailService;
+
     public Order placeOrder(String username, List<OrderItem> items) {
 
         Order order = new Order();
 
         order.setUsername(username);
         order.setOrderDate(LocalDateTime.now());
+
+        order.setStatus("PENDING");
 
         Double total = 0.0;
 
@@ -55,7 +60,18 @@ public class OrderService {
         order.setItems(items);
         order.setTotalPrice(total);
 
-        return orderRepository.save(order);
+        // SAVE ORDER
+        Order savedOrder = orderRepository.save(order);
+
+        // SEND EMAIL
+        emailService.sendOrderConfirmation(
+                "prachii8826@gmail.com",
+                username,
+                savedOrder.getTotalPrice(),
+                savedOrder.getId()
+        );
+
+        return savedOrder;
     }
 
     public Page<Order> getUserOrders(String username, Pageable pageable) {
@@ -64,5 +80,15 @@ public class OrderService {
 
     public List<Order> getAllOrders(){
         return orderRepository.findAll();
+    }
+
+    public Order updateOrderStatus(Long orderId, String status ) {
+
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found"));
+
+        order.setStatus(status);
+
+        return orderRepository.save(order);
     }
 }
