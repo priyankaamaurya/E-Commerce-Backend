@@ -21,7 +21,7 @@ public class SwaggerConfig {
                         .version("1.0")
                         .description("E-commerce Backend APIs with JWT Security"))
 
-                .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
+//                .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
 
                 .components(new io.swagger.v3.oas.models.Components()
                         .addSecuritySchemes(securitySchemeName,

@@ -22,12 +22,14 @@ public class JwtUtil {
 
     public String generateToken(String username, String role) {
 
+        role = role.toUpperCase();
+
         Map<String, Object> claims = new HashMap<>();
-        claims.put("role", role);
+        claims.put("role", "ROLE_" + role);
 
         return Jwts.builder()
                 .setSubject(username)
-                .claim("role", role)
+                .claim("role", "ROLE_" +    role)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 1 hour
                 .signWith(getSignKey(), SignatureAlgorithm.HS256)
