@@ -21,12 +21,12 @@ public class SwaggerConfig {
                         .version("1.0")
                         .description("E-commerce Backend APIs with JWT Security"))
 
-//                .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
+                .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
 
                 .components(new io.swagger.v3.oas.models.Components()
                         .addSecuritySchemes(securitySchemeName,
                                 new SecurityScheme()
-                                        .name(securitySchemeName)
+                                        .name("Authorization")
                                         .type(SecurityScheme.Type.HTTP)
                                         .scheme("bearer")
                                         .bearerFormat("JWT")

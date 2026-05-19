@@ -1,5 +1,6 @@
 package com.ecommerce.backend.service;
 
+import com.ecommerce.backend.dto.OrderItemRequest;
 import com.ecommerce.backend.model.Order;
 import com.ecommerce.backend.model.OrderItem;
 import com.ecommerce.backend.model.Product;
@@ -11,7 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,38 +27,40 @@ public class OrderService {
     @Autowired
     private EmailService emailService;
 
-    public Order placeOrder(String username, List<OrderItem> items) {
+    public Order placeOrder(String username, List<OrderItemRequest> items) {
 
         Order order = new Order();
-
         order.setUsername(username);
         order.setOrderDate(LocalDateTime.now());
-
         order.setStatus("PENDING");
 
         Double total = 0.0;
 
-        for (OrderItem item : items) {
+        List<OrderItem> orderItems = new ArrayList<>();
+
+        for (OrderItemRequest req : items) {
 
             // FETCH PRODUCT FROM DB
-            Product product = repo.findById(item.getProduct().getId())
+            Product product = repo.findById(req.getProductId())
                     .orElseThrow(() -> new RuntimeException("Product not found"));
 
-            // IMPORTANT LINE (YOU MISSED THIS)
+            // CREATE NEW ORDER ITEM
+            OrderItem item = new OrderItem();
             item.setProduct(product);
-
-            // SET VALUES
             item.setProductName(product.getName());
             item.setPrice(product.getPrice());
+            item.setQuantity(req.getQuantity());
 
             // CALCULATE TOTAL
-            total += product.getPrice() * item.getQuantity();
+            total += product.getPrice() * req.getQuantity();
 
             // LINK ORDER
             item.setOrder(order);
+
+            orderItems.add(item);
         }
 
-        order.setItems(items);
+        order.setItems(orderItems);
         order.setTotalPrice(total);
 
         // SAVE ORDER
