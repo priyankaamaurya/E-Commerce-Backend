@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/orders")
-@Tag(name = "Order Controller", description = "APIs for managing orders")
+@Tag(name = "Order APIs", description = "APIs for managing orders")
 public class OrderController {
 
     @Autowired

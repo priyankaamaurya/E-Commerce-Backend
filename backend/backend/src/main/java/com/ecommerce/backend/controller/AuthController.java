@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "App APIs", description = "Login and Registration APIs")
 @RestController
 @RequestMapping("/api/auth")
+@Tag(name = "App APIs", description = "Login and Registration APIs")
 public class AuthController {
 
     @Autowired
