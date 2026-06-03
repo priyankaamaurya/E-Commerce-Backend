@@ -145,11 +145,22 @@ All APIs are tested using Postman:
 - Tested CRUD operations
 - Validated secure endpoints with JWT
 
-##  Register API
-![Swagger](screenshots/Register.png)
+### Authentication
 
-##  Login API
-![Cart](screenshots/Login.png)
+![Register](backend/backend/screenshots/Register.png)
+![Login](backend/backend/screenshots/Login.png)
+
+---
+
+### Order APIs
+
+![Order](backend/backend/screenshots/Order.png)
+
+---
+
+### Cart APIs
+
+![Cart](backend/backend/screenshots/Cart.png)
 
 ---
 
