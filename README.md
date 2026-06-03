@@ -182,7 +182,7 @@ Cartify
 
 1. Clone repository
 ```
-git clone https://github.com/priyankaamaurya/cartify.git
+git clone https://github.com/priyankaamaurya/E-Commerce-Backend.git
 ```
 
 2. Configure MySQL in application.properties
