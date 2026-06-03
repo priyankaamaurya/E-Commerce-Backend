@@ -182,7 +182,7 @@ Cartify
 
 1. Clone repository
 ```
-git clone https://github.com/your-username/cartify.git
+git clone https://github.com/priyankaamaurya/cartify.git
 ```
 
 2. Configure MySQL in application.properties
@@ -228,6 +228,6 @@ GitHub: https://github.com/priyankaamaurya
 
 ---
 
-## ⭐ If you like this project
+##  If you like this project
 
 Give it a ⭐ on GitHub and feel free to explore the code!
