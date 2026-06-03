@@ -1,4 +1,4 @@
-# 🛒 Cartify – E-Commerce Backend System
+#  Cartify – E-Commerce Backend System
 
 Cartify is a scalable and secure backend system designed for an e-commerce application. It is built using Java, Spring Boot, and MySQL, following a layered architecture. The system supports complete e-commerce workflows such as user authentication, product management, cart operations, and order processing.
 
@@ -6,7 +6,7 @@ The project focuses on building secure REST APIs, clean architecture, and real-w
 
 ---
 
-## 🎯 Project Objective
+##  Project Objective
 
 The main objective of Cartify is to design a backend system that can handle:
 
@@ -20,9 +20,9 @@ This project demonstrates real-world backend development skills using industry-s
 
 ---
 
-## 🚀 Key Features
+##  Key Features
 
-### 🔐 Authentication & Security
+###  Authentication & Security
 
 - User registration and login system
 - JWT (JSON Web Token) based authentication
@@ -30,21 +30,21 @@ This project demonstrates real-world backend development skills using industry-s
 - Password encryption using BCrypt
 - Stateless session handling
   
-### 🛍️ Product Management
+###  Product Management
 
 - Add new products (Admin only)
 - Update and delete products
 - Fetch product details
 - View all available products
 
-### 🛒 Cart Management
+### Cart Management
 
 - Add products to cart
 - Remove products from cart
 - View user cart items
 - Automatic price calculation
 
-### 📦 Order Management
+###  Order Management
 
 - Place order from cart
 - Order summary generation
@@ -52,7 +52,7 @@ This project demonstrates real-world backend development skills using industry-s
 
 ---
 
-## 🏗️ System Architecture
+##  System Architecture
 
 The project follows a 3-layer architecture:
 
@@ -64,7 +64,7 @@ This ensures clean code separation and scalability.
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - Language: Java
 - Framework: Spring Boot
@@ -77,7 +77,7 @@ This ensures clean code separation and scalability.
 
 ---
 
-## 🗄️ Database Design
+##  Database Design
 
 Main entities used:
 
@@ -95,7 +95,7 @@ Relationships:
 
 ---
 
-## 🔑 Authentication Flow
+##  Authentication Flow
 
 - User registers or logs in
 - Server generates JWT token
@@ -110,34 +110,34 @@ Authorization: Bearer <JWT_TOKEN>
 
 ---
 
-## 📡 API Endpoints
+##  API Endpoints
 
-### 👤 Auth APIs
+###  Auth APIs
 
 - POST /api/auth/register → Register new user
 - POST /api/auth/login → Login user
   
-### 🛍️ Product APIs
+###  Product APIs
 
 - GET /api/products → Get all products
 - POST /api/products → Add product (Admin)
 - PUT /api/products/{id} → Update product
 - DELETE /api/products/{id} → Delete product
   
-### 🛒 Cart APIs
+###  Cart APIs
 
 - POST /api/cart/add → Add item to cart
 - GET /api/cart → View cart
 - DELETE /api/cart/remove/{id} → Remove item
 
-### 📦 Order APIs
+###  Order APIs
 
 - POST /api/orders/place → Place order
 - GET /api/orders → View orders
 
 ---
 
-## 🧪 API Testing
+##  API Testing
 
 All APIs are tested using Postman:
 
@@ -147,7 +147,7 @@ All APIs are tested using Postman:
 
 ---
 
-## 📘 API Documentation
+##  API Documentation
 
 Swagger UI is integrated for API documentation:
 ```
@@ -162,7 +162,7 @@ It provides:
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 ```
 Cartify
  ┣ controller
@@ -178,7 +178,7 @@ Cartify
 
 ---
 
-## ⚙️ How to Run
+##  How to Run
 
 1. Clone repository
 ```
@@ -197,7 +197,7 @@ http://localhost:8080/swagger-ui/
 ```
 ---
 
-## 🔮 Future Enhancements
+##  Future Enhancements
 
 - Payment gateway integration (Razorpay/Stripe)
 - Product search & filtering
@@ -208,7 +208,7 @@ http://localhost:8080/swagger-ui/
 
 ---
 
-## 🏆 Key Learnings
+##  Key Learnings
 
 - Building secure REST APIs using Spring Boot
 - Implementing JWT authentication from scratch
@@ -218,13 +218,13 @@ http://localhost:8080/swagger-ui/
 
 ---
 
-## 👨‍💻 Author
+##  Author
 
 Priyanka Maurya
 
 BCA Graduate | Java Full Stack Developer
 
-GitHub: https://github.com/your-username
+GitHub: https://github.com/priyankaamaurya 
 
 ---
 
