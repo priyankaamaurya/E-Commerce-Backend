@@ -151,7 +151,7 @@ All APIs are tested using Postman:
 
 Swagger UI is integrated for API documentation:
 ```
-http://localhost:8080/swagger-ui/
+http://localhost:8080/swagger-ui/index.html#/
 ```
 
 It provides:
@@ -193,7 +193,7 @@ mvn spring-boot:run
 
 4. Open Swagger UI
 ```
-http://localhost:8080/swagger-ui/
+http://localhost:8080/swagger-ui/index.html#/
 ```
 ---
 
