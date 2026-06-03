@@ -148,6 +148,7 @@ All APIs are tested using Postman:
 ### Authentication
 
 ![Register](backend/backend/screenshots/Register.png)
+
 ![Login](backend/backend/screenshots/Login.png)
 
 ---
@@ -176,6 +177,20 @@ It provides:
 - API testing interface
 - Request/response structure
 - Endpoint descriptions
+
+### Swagger UI
+
+![Cartify](backend/backend/screenshots/Cartify.png)
+
+---
+
+### Crud APIs
+
+![Crud](backend/backend/screenshots/Crud.png)
+
+![Api](backend/backend/screenshots/Api.png)
+
+---
 
 ---
 
