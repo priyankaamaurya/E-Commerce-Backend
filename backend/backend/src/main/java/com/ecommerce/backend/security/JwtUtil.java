@@ -24,12 +24,12 @@ public class JwtUtil {
 
         role = role.toUpperCase();
 
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("role", "ROLE_" + role);
+//        Map<String, Object> claims = new HashMap<>();
+//        claims.put("role", "ROLE_" + role);
 
         return Jwts.builder()
                 .setSubject(username)
-                .claim("role", "ROLE_" +    role)
+                .claim("role", role.toUpperCase())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 1 hour
                 .signWith(getSignKey(), SignatureAlgorithm.HS256)

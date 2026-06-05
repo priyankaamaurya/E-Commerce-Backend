@@ -46,6 +46,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
                 role= role.toUpperCase();
 
+                System.out.println("FINAL AUTHORITY: " + (role.startsWith("ROLE_") ? role : "ROLE_" + role));
+
                 System.out.println("USERNAME: " + username);
                 System.out.println("ROLE: " + role);
 
