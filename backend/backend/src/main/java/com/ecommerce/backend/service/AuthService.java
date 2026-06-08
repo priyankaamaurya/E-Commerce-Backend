@@ -56,4 +56,9 @@ public class AuthService {
             throw new RuntimeException("Invalid password");
         }
     }
+
+    public User getUserByUsername(String username) {
+        return repo.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
 }

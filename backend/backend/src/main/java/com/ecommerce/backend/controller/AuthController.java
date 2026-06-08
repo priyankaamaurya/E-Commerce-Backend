@@ -30,8 +30,13 @@ public class AuthController {
 
         String token = service.login(request);
 
+        User user = service.getUserByUsername(request.getUsername());
+
         return ResponseEntity.ok(
-                java.util.Map.of("token", token)
+                java.util.Map.of(
+                        "token", token,
+                        "role", user.getRole()  // ✅ send role too
+                )
         );
     }
 }
