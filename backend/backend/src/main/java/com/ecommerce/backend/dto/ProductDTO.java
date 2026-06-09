@@ -21,4 +21,7 @@ public class ProductDTO {
 
     @Min(value = 0, message = "Stock cannot be negative")
     private Integer stock;
+
+    @Size(max = 1000, message = "Image URL too long")
+    private String imageUrl;
 }

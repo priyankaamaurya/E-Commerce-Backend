@@ -22,6 +22,7 @@ public class ProductService {
         product.setPrice(dto.getPrice());
         product.setDescription(dto.getDescription());
         product.setStock(dto.getStock());
+        product.setImageUrl(dto.getImageUrl());
 
         return repo.save(product);
     }
@@ -51,6 +52,7 @@ public class ProductService {
             existing.setPrice(dto.getPrice());
             existing.setDescription(dto.getDescription());
             existing.setStock(dto.getStock());
+            existing.setImageUrl(dto.getImageUrl());
 
             return repo.save(existing);
     }

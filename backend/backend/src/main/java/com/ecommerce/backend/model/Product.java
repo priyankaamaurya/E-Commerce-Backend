@@ -17,4 +17,7 @@ public class Product {
     private Double price;
     private String description;
     private Integer stock;
+
+    @Column(length = 1000)
+    private String imageUrl;
 }

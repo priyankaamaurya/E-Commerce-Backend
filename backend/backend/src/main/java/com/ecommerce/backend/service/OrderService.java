@@ -4,8 +4,10 @@ import com.ecommerce.backend.dto.OrderItemRequest;
 import com.ecommerce.backend.model.Order;
 import com.ecommerce.backend.model.OrderItem;
 import com.ecommerce.backend.model.Product;
+import com.ecommerce.backend.model.User;
 import com.ecommerce.backend.repository.OrderRepository;
 import com.ecommerce.backend.repository.ProductRepository;
+import com.ecommerce.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,6 +28,9 @@ public class OrderService {
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public Order placeOrder(String username, List<OrderItemRequest> items) {
 
@@ -66,9 +71,13 @@ public class OrderService {
         // SAVE ORDER
         Order savedOrder = orderRepository.save(order);
 
+        // GET USER EMAIL FROM DB
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
         // SEND EMAIL
         emailService.sendOrderConfirmation(
-                "prachii8826@gmail.com",
+                user.getEmail(),
                 username,
                 savedOrder.getTotalPrice(),
                 savedOrder.getId()
