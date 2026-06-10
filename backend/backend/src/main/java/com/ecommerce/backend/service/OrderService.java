@@ -5,6 +5,7 @@ import com.ecommerce.backend.model.Order;
 import com.ecommerce.backend.model.OrderItem;
 import com.ecommerce.backend.model.Product;
 import com.ecommerce.backend.model.User;
+import com.ecommerce.backend.repository.CartRepository;
 import com.ecommerce.backend.repository.OrderRepository;
 import com.ecommerce.backend.repository.ProductRepository;
 import com.ecommerce.backend.repository.UserRepository;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -32,6 +34,10 @@ public class OrderService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private CartRepository cartRepository;
+
+    @Transactional
     public Order placeOrder(String username, List<OrderItemRequest> items) {
 
         Order order = new Order();
@@ -70,6 +76,9 @@ public class OrderService {
 
         // SAVE ORDER
         Order savedOrder = orderRepository.save(order);
+
+        // CLEAR CART AFTER ORDER
+        cartRepository.deleteByUsername(username);
 
         // GET USER EMAIL FROM DB
         User user = userRepository.findByUsername(username)
