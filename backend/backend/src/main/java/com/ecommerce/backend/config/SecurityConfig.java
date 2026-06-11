@@ -90,13 +90,10 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(
-//                "http://localhost:*",
-//                "https://*.vercel.app"
                 "http://localhost:5173",
                 "http://localhost:5174",
                 "http://localhost:3000",
-                "https://cartify-frontend-28x5-priyankaamauryas-projects.vercel.app/",
-//              "https://cartify-frontend.vercel.app",
+                "https://cartify-frontend-28x5-priyankaamauryas-projects.vercel.app",
                 "https://e-commerce-backend-production-d6f0.up.railway.app"
         ));
 
