@@ -55,22 +55,22 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/products/**").permitAll()
 
                         // ADMIN
-                        .requestMatchers(HttpMethod.POST, "/api/products").hasAuthority("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/products/**").hasAuthority("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/products/**").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/products").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/products/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/products/**").hasRole("ADMIN")
 
                         // USER + ADMIN
                         .requestMatchers(HttpMethod.GET, "/api/products/**").hasAnyRole("USER", "ADMIN")
 
                         // CART (USER only)
-                        .requestMatchers("/api/cart/**").hasAuthority("USER")
+                        .requestMatchers("/api/cart/**").hasRole("USER")
 
                         //ORDERS
-                        .requestMatchers(HttpMethod.POST, "/api/orders/place").hasAuthority("USER")
-                        .requestMatchers(HttpMethod.GET, "/api/orders/my").hasAuthority("USER")
-                        .requestMatchers(HttpMethod.GET, "/api/orders/all").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/orders/place").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/api/orders/my").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/api/orders/all").hasRole("ADMIN")
 
-                        .requestMatchers(HttpMethod.PUT, "/api/orders/*/status").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/orders/*/status").hasRole("ADMIN")
 
                         .requestMatchers("/api/users/**").hasAnyRole("USER", "ADMIN")
 
@@ -89,18 +89,21 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOriginPatterns(List.of(
-                "http://localhost:*",
-                "https://*.vercel.app"
-//                "http://localhost:5173",
-//                "http://localhost:5174",
-//                "http://localhost:3000",
-//                "https://cartify-frontend.vercel.app"
-//                "https://e-commerce-backend-production-d6f0.up.railway.app"
+        config.setAllowedOrigins(List.of(
+//                "http://localhost:*",
+//                "https://*.vercel.app"
+                "http://localhost:5173",
+                "http://localhost:5174",
+                "http://localhost:3000",
+                "https://cartify-frontend-28x5-priyankaamauryas-projects.vercel.app/",
+//              "https://cartify-frontend.vercel.app",
+                "https://e-commerce-backend-production-d6f0.up.railway.app"
         ));
+
         config.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
+
         CorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         ((UrlBasedCorsConfigurationSource)source).registerCorsConfiguration("/**", config);
         return source;
