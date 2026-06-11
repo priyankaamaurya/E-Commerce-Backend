@@ -7,6 +7,8 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.List;
+
 @Configuration
 public class SwaggerConfig {
 
@@ -16,6 +18,12 @@ public class SwaggerConfig {
         final String securitySchemeName = "bearerAuth";
 
         return new OpenAPI()
+                .servers(List.of(
+                        new io.swagger.v3.oas.models.servers.Server()
+                                .url("https://e-commerce-backend-production-d6f0.up.railway.app"),
+                        new io.swagger.v3.oas.models.servers.Server()
+                                .url("http://localhost:8080")
+                ))
                 .info(new Info()
                         .title("Cartify API")
                         .version("1.0")

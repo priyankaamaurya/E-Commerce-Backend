@@ -24,9 +24,6 @@ public class JwtUtil {
 
         role = role.toUpperCase();
 
-//        Map<String, Object> claims = new HashMap<>();
-//        claims.put("role", "ROLE_" + role);
-
         return Jwts.builder()
                 .setSubject(username)
                 .claim("role", role.toUpperCase())
