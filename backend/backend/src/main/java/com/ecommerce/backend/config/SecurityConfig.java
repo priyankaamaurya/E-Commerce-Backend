@@ -63,14 +63,14 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/products/**").hasAnyRole("USER", "ADMIN")
 
                         // CART (USER only)
-                        .requestMatchers("/api/cart/**").hasRole("USER")
+                        .requestMatchers("/api/cart/**").hasAuthority("USER")
 
                         //ORDERS
-                        .requestMatchers(HttpMethod.POST, "/api/orders/place").hasRole("USER")
-                        .requestMatchers(HttpMethod.GET, "/api/orders/my").hasRole("USER")
-                        .requestMatchers(HttpMethod.GET, "/api/orders/all").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/orders/place").hasAuthority("USER")
+                        .requestMatchers(HttpMethod.GET, "/api/orders/my").hasAuthority("USER")
+                        .requestMatchers(HttpMethod.GET, "/api/orders/all").hasAuthority("ADMIN")
 
-                        .requestMatchers(HttpMethod.PUT, "/api/orders/*/status").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/orders/*/status").hasAuthority("ADMIN")
 
                         .requestMatchers("/api/users/**").hasAnyRole("USER", "ADMIN")
 
