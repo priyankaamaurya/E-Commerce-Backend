@@ -85,12 +85,14 @@ public class OrderService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         // SEND EMAIL
-        emailService.sendOrderConfirmation(
-                user.getEmail(),
-                username,
-                savedOrder.getTotalPrice(),
-                savedOrder.getId()
-        );
+        if (user.getEmail() != null && !user.getEmail().isEmpty()) {
+            emailService.sendOrderConfirmation(
+                    user.getEmail(),
+                    username,
+                    savedOrder.getTotalPrice(),
+                    savedOrder.getId()
+            );
+        }
 
         return savedOrder;
     }
