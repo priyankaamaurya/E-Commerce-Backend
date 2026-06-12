@@ -90,35 +90,53 @@ A full-stack e-commerce application built with **Spring Boot** (backend) and **R
 
 ```
 Cartify/
-├── backend/                    # Spring Boot Backend
-│   ├── controller/             # REST API Controllers
+├── backend/                                    # Spring Boot Backend
+│   ├── controller/                             # REST API Controllers
 │   │   ├── AuthController.java
 │   │   ├── ProductController.java
 │   │   ├── CartController.java
 │   │   ├── OrderController.java
 │   │   └── UserController.java
-│   ├── service/                # Business Logic
+│   ├── service/                                # Business Logic
 │   │   ├── AuthService.java
 │   │   ├── ProductService.java
 │   │   ├── CartService.java
 │   │   ├── OrderService.java
 │   │   ├── UserService.java
 │   │   └── EmailService.java
-│   ├── model/                  # JPA Entities
-│   │   ├── User.java
+│   ├── model/                                  # JPA Entities
+│   │   ├── User.java  
 │   │   ├── Product.java
 │   │   ├── CartItem.java
 │   │   ├── Order.java
 │   │   └── OrderItem.java
-│   ├── repository/             # Spring Data JPA Repos
-│   ├── security/               # JWT Filter & Util
-│   ├── config/                 # Security & Swagger Config
-│   ├── dto/                    # Data Transfer Objects
-│   └── exception/              # Global Exception Handler
-│
-└── frontend/                   # React.js Frontend
+│   ├── repository/                             # Spring Data JPA Repos
+│   │   ├── CartRepository.java
+│   │   ├── OrderRepository.java
+│   │   ├── ProductRepository.java
+│   │   └── UserRepository.java
+│   ├── security/                               # JWT Filter & Util
+│   │   ├── JwtAuthFilter.java
+│   │   └── JwtUtil.java
+│   ├── config/                                 # Security & Swagger Config
+│   │   ├── SecurityConfig.java
+│   │   └── SwaggerConfig.java
+│   ├── dto/                                    # Data Transfer Objects
+│   │   ├── ChangePasswordRequest.java
+│   │   ├── LoginRequest.java
+│   │   ├── OrderItemDTO.java
+│   │   ├── OrderItemRequest.java
+│   │   ├── OrderRequestDTO.java
+│   │   ├── OrderStatusRequest.java
+│   │   ├── ProductDTO.java
+│   │   └── RegisterRequest.java
+│   └── exception/                              # Global Exception Handler
+│   │   ├── GlobalExceptionHandler.java
+│   │   └── ResourceNotFoundException.java
+└── frontend/                                   # React.js Frontend
     └── src/
-        └── Cartify.jsx         # Main App (Single File)
+        ├── Cartify.jsx  
+        └── main.jsx                            # Main App (Single File)
 ```
 
 ---
