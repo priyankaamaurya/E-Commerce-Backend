@@ -1,265 +1,297 @@
-#  Cartify – E-Commerce Backend System
+# Cartify – Full Stack E-Commerce Application
 
-Cartify is a scalable and secure backend system designed for an e-commerce application. It is built using Java, Spring Boot, and MySQL, following a layered architecture. The system supports complete e-commerce workflows such as user authentication, product management, cart operations, and order processing.
+![Cartify Banner](https://images.unsplash.com/photo-1557821552-17105176677c?w=1200&h=400&fit=crop)
 
-The project focuses on building secure REST APIs, clean architecture, and real-world backend development practices using Spring Boot ecosystem.
-
----
-
-##  Project Objective
-
-The main objective of Cartify is to design a backend system that can handle:
-
-- Secure user authentication and authorization
-- Product listing and management
-- Cart functionality for users
-- Order placement and processing
-- Scalable REST API architecture
-
-This project demonstrates real-world backend development skills using industry-standard technologies.
+A full-stack e-commerce application built with **Spring Boot** (backend) and **React.js** (frontend), featuring JWT authentication, role-based access control, and real-time email notifications.
 
 ---
 
-##  Key Features
+## Live Demo
 
-###  Authentication & Security
+| Service | URL |
+|---------|-----|
+| Frontend | [cartify-frontend-28x5-priyankaamauryas-projects.vercel.app](https://cartify-frontend-28x5-priyankaamauryas-projects.vercel.app) |
+| Backend API | [e-commerce-backend-production-d6f0.up.railway.app](https://e-commerce-backend-production-d6f0.up.railway.app) |
+| Swagger UI | [Swagger Docs](https://e-commerce-backend-production-d6f0.up.railway.app/swagger-ui/index.html) |
 
-- User registration and login system
+---
+
+## Features
+
+### Authentication & Security
+- User registration and login
 - JWT (JSON Web Token) based authentication
-- Role-based authorization (USER / ADMIN)
+- Role-based authorization — **USER** / **ADMIN**
 - Password encryption using BCrypt
 - Stateless session handling
-  
-###  Product Management
 
-- Add new products (Admin only)
-- Update and delete products
-- Fetch product details
-- View all available products
+### Product Management
+- Browse all products with images
+- Search products by name
+- Add, edit, delete products (**Admin only**)
+- Stock quantity management
 
 ### Cart Management
-
 - Add products to cart
-- Remove products from cart
-- View user cart items
-- Automatic price calculation
+- Update quantity with `+` / `−` controls
+- Remove items from cart
+- Automatic total price calculation
 
-###  Order Management
-
+### Order Management
 - Place order from cart
-- Order summary generation
-- Order tracking structure (basic level)
+- Auto cart clear after order placement
+- Order history with status tracking
+- Admin can update order status (PENDING → SHIPPED → DELIVERED)
+
+### Email Notifications
+- Order confirmation email sent via **SendGrid**
+- HTML email template with order details
+
+### User Profile
+- View profile (username, email, role)
+- Change password securely
 
 ---
 
-##  System Architecture
+## Tech Stack
 
-The project follows a 3-layer architecture:
+**Backend:**
+| Technology | Purpose |
+|------------|---------|
+| Java 21 | Programming Language |
+| Spring Boot 4.x | Backend Framework |
+| Spring Security | Authentication & Authorization |
+| JWT (jjwt) | Token-based Auth |
+| Spring Data JPA | ORM |
+| Hibernate | Database Persistence |
+| PostgreSQL | Database |
+| SendGrid | Email Service |
+| Swagger UI | API Documentation |
+| Maven | Build Tool |
 
-- Controller Layer → Handles API requests
-- Service Layer → Contains business logic
-- Repository Layer → Handles database operations
+**Frontend:**
+| Technology | Purpose |
+|------------|---------|
+| React.js | Frontend Framework |
+| Vite | Build Tool |
+| Context API | State Management |
+| Fetch API | REST API Integration |
+| JSX | UI Components |
 
-This ensures clean code separation and scalability.
-
----
-
-##  Tech Stack
-
-- Language: Java
-- Framework: Spring Boot
-- Security: Spring Security, JWT
-- ORM: Spring Data JPA, Hibernate
-- Database: MySQL
-- Build Tool: Maven
-- Testing Tools: Postman
-- API Documentation: Swagger UI
-
----
-
-##  Database Design
-
-Main entities used:
-
-- User
-- Product
-- Cart
-- Order
-- Role
-
-Relationships:
-
-- One User → Many Orders
-- One User → One Cart
-- Cart → Multiple Products
+**Deployment:**
+| Service | Purpose |
+|---------|---------|
+| Railway | Backend + PostgreSQL Hosting |
+| Vercel | Frontend Hosting |
 
 ---
 
-##  Authentication Flow
+## Project Structure
 
-- User registers or logs in
-- Server generates JWT token
-- Token is sent to client
-- Client includes token in every request header
-- Server validates token before processing request
-
-Example:
 ```
-Authorization: Bearer <JWT_TOKEN>
+Cartify/
+├── backend/                    # Spring Boot Backend
+│   ├── controller/             # REST API Controllers
+│   │   ├── AuthController.java
+│   │   ├── ProductController.java
+│   │   ├── CartController.java
+│   │   ├── OrderController.java
+│   │   └── UserController.java
+│   ├── service/                # Business Logic
+│   │   ├── AuthService.java
+│   │   ├── ProductService.java
+│   │   ├── CartService.java
+│   │   ├── OrderService.java
+│   │   ├── UserService.java
+│   │   └── EmailService.java
+│   ├── model/                  # JPA Entities
+│   │   ├── User.java
+│   │   ├── Product.java
+│   │   ├── CartItem.java
+│   │   ├── Order.java
+│   │   └── OrderItem.java
+│   ├── repository/             # Spring Data JPA Repos
+│   ├── security/               # JWT Filter & Util
+│   ├── config/                 # Security & Swagger Config
+│   ├── dto/                    # Data Transfer Objects
+│   └── exception/              # Global Exception Handler
+│
+└── frontend/                   # React.js Frontend
+    └── src/
+        └── Cartify.jsx         # Main App (Single File)
 ```
 
 ---
 
-##  API Endpoints
+## API Endpoints
 
-###  Auth APIs
+### Auth APIs
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| POST | `/api/auth/register` | Register new user | Public |
+| POST | `/api/auth/login` | Login user | Public |
 
-- POST /api/auth/register → Register new user
-- POST /api/auth/login → Login user
-  
-###  Product APIs
-
-- GET /api/products → Get all products
-- POST /api/products → Add product (Admin)
-- PUT /api/products/{id} → Update product
-- DELETE /api/products/{id} → Delete product
-  
-###  Cart APIs
-
-- POST /api/cart/add → Add item to cart
-- GET /api/cart → View cart
-- DELETE /api/cart/remove/{id} → Remove item
-
-###  Order APIs
-
-- POST /api/orders/place → Place order
-- GET /api/orders → View orders
-
----
-
-##  API Testing
-
-All APIs are tested using Postman:
-
-- Verified authentication flow
-- Tested CRUD operations
-- Validated secure endpoints with JWT
-
-### Authentication
-
-![Register](backend/backend/screenshots/Register.png)
-
-![Login](backend/backend/screenshots/Login.png)
-
----
-
-### Order APIs
-
-![Order](backend/backend/screenshots/Order.png)
-
----
+### Product APIs
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| GET | `/api/products` | Get all products | Public |
+| GET | `/api/products/{id}` | Get product by ID | Public |
+| POST | `/api/products` | Add new product | ADMIN |
+| PUT | `/api/products/{id}` | Update product | ADMIN |
+| DELETE | `/api/products/{id}` | Delete product | ADMIN |
 
 ### Cart APIs
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| POST | `/api/cart/add` | Add item to cart | USER |
+| GET | `/api/cart` | View cart | USER |
+| PUT | `/api/cart/update` | Update quantity | USER |
+| DELETE | `/api/cart/{itemId}` | Remove item | USER |
+| DELETE | `/api/cart/clear` | Clear cart | USER |
 
-![Cart](backend/backend/screenshots/Cart.png)
+### Order APIs
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| POST | `/api/orders/place` | Place order | USER |
+| GET | `/api/orders/my` | Get my orders | USER |
+| GET | `/api/orders/all` | Get all orders | ADMIN |
+| PUT | `/api/orders/{id}/status` | Update status | ADMIN |
+
+### User APIs
+| Method | Endpoint | Description | Access |
+|--------|----------|-------------|--------|
+| GET | `/api/users/profile` | Get profile | USER/ADMIN |
+| PUT | `/api/users/change-password` | Change password | USER/ADMIN |
 
 ---
 
-##  API Documentation
+## Authentication Flow
 
-Swagger UI is integrated for API documentation:
 ```
-http://localhost:8080/swagger-ui/index.html#/
-```
-
-It provides:
-
-- API testing interface
-- Request/response structure
-- Endpoint descriptions
-
-### Swagger UI
-
-![Cartify](backend/backend/screenshots/Cartify.png)
-
----
-
-### Crud APIs
-
-![Crud](backend/backend/screenshots/Crud.png)
-
-![Api](backend/backend/screenshots/Api.png)
-
----
-
----
-
-##  Project Structure
-```
-Cartify
- ┣ controller
- ┣ service
- ┣ repository
- ┣ model
- ┣ dto
- ┣ config
- ┣ security
- ┣ exception
- ┗ util
+1. User registers → POST /api/auth/register
+2. User logs in → POST /api/auth/login → receives JWT token
+3. Client stores token in localStorage
+4. Every request includes: Authorization: Bearer <JWT_TOKEN>
+5. Server validates token → processes request
 ```
 
 ---
 
-##  How to Run
+## Database Design
 
-1. Clone repository
 ```
+User          Product        CartItem       Order         OrderItem
+------        -------        --------       -----         ---------
+id            id             id             id            id
+username      name           username       username      product_id
+email         description    product_id     total_price   product_name
+password      price          quantity       order_date    price
+role          stock                         status        quantity
+              image_url                     items[]
+```
+
+---
+
+## Run Locally
+
+### Prerequisites
+- Java 21
+- Maven
+- PostgreSQL
+- Node.js 18+
+
+### Backend Setup
+
+```bash
+# Clone repository
 git clone https://github.com/priyankaamaurya/E-Commerce-Backend.git
-```
+cd E-Commerce-Backend/backend
 
-2. Configure MySQL in application.properties
-3. Run project
-```
+# Configure application.properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/ecommerce_db
+spring.datasource.username=postgres
+spring.datasource.password=your_password
+jwt.secret=your_secret_key
+sendgrid.api.key=your_sendgrid_key
+sendgrid.from.email=your_email@gmail.com
+
+# Run
 mvn spring-boot:run
 ```
 
-4. Open Swagger UI
+### Frontend Setup
+
+```bash
+# Clone repository
+git clone https://github.com/priyankaamaurya/cartify-frontend.git
+cd cartify-frontend
+
+# Install dependencies
+npm install
+
+# Update BASE_URL in src/App.jsx
+const BASE_URL = "http://localhost:8080";
+
+# Run
+npm run dev
 ```
-http://localhost:8080/swagger-ui/index.html#/
-```
----
 
-##  Future Enhancements
-
-- Payment gateway integration (Razorpay/Stripe)
-- Product search & filtering
-- Pagination & sorting
-- Email notifications
-- Frontend integration (React.js)
-- Microservices migration
+Open **http://localhost:5173** 🎉
 
 ---
 
-##  Key Learnings
+## Test Credentials
 
-- Building secure REST APIs using Spring Boot
-- Implementing JWT authentication from scratch
-- Working with relational databases using JPA
-- Designing scalable backend architecture
-- API testing and documentation practices
+| Role | Username | Password |
+|------|----------|----------|
+| ADMIN | admin | admin123 |
+| USER | Register via app | - |
+
+> Register via Swagger UI to create ADMIN: `POST /api/auth/register` with `"role": "ADMIN"`
 
 ---
 
-##  Author
+## Screenshots
 
-Priyanka Maurya
+### Home Page
+![Home](https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=400&fit=crop)
+
+### Products Page
+Browse products with images, search functionality and hover effects.
+
+### Cart Page
+Manage cart items with quantity controls and order summary.
+
+### Admin Panel
+Add/edit/delete products and manage all orders with status updates.
+
+---
+
+## Future Enhancements
+
+- [ ] Payment gateway integration (Razorpay)
+- [ ] Product search & filtering by category/price
+- [ ] Pagination on products and orders
+- [ ] Product ratings and reviews
+- [ ] Microservices migration
+- [ ] Mobile app (React Native)
+
+---
+
+## Author
+
+**Priyanka Maurya**
 
 BCA Graduate | Java Full Stack Developer
 
-GitHub: https://github.com/priyankaamaurya 
+[![GitHub](https://img.shields.io/badge/GitHub-priyankaamaurya-black?style=flat&logo=github)](https://github.com/priyankaamaurya)
 
 ---
 
-##  If you like this project
+## Show Your Support
 
-Give it a ⭐ on GitHub and feel free to explore the code!
+If you like this project, give it a **⭐ star** on GitHub!
+
+---
+
+*Built with ❤️ using Spring Boot + React.js*
