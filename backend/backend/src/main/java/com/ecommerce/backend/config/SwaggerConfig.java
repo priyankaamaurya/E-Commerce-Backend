@@ -20,7 +20,7 @@ public class SwaggerConfig {
         return new OpenAPI()
                 .servers(List.of(
                         new io.swagger.v3.oas.models.servers.Server()
-                                .url("https://e-commerce-backend-production-d6f0.up.railway.app"),
+                                .url("https://e-commerce-backend-omnx.onrender.com"),
                         new io.swagger.v3.oas.models.servers.Server()
                                 .url("http://localhost:8080")
                 ))
