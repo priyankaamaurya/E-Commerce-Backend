@@ -74,7 +74,7 @@ A full-stack e-commerce application built with **Spring Boot** (backend) and **R
 |------------|---------|
 | React.js | Frontend Framework |
 | Vite | Build Tool |
-| Context API | State Management |
+| Context API | State Management | 
 | Fetch API | REST API Integration |
 | JSX | UI Components |
 
